@@ -89,4 +89,28 @@ function getDemoInfo(id) {
         });
     }
     
+// function for change event
+function optionChanged(id) {
+    getPlots(id);
+    getDemoInfo(id);
+}
     
+// create function for the initial data rendering
+function init() {
+    var dropdown = d3.select("#selDataset");
+    //read the data
+    d3.json("data/samples.json").then((data) => {
+        console.log(data)
+
+        // get id data to dropdown menu
+        data.names.forEach(function(name) {
+            dropdown.append("option").text(name).property("value");
+        });
+    
+        // display data and plots
+        getPlots(data.names[0]);
+        getDemoInfo(data.names[0]);
+    });
+}
+    
+init();
