@@ -31,4 +31,42 @@ function getPlots(id) {
             type: "bar",
             orientation: "h",
         };
-       
+
+        var data = [trace];
+        // layout
+        var layout = {
+            title: "Top 10 OTU",
+            yaxis:{
+                tickmode: "linear",
+            },
+            margin: {
+                l: 100,
+                r: 100,
+                t: 100,
+                b: 30 
+            }
+        };
+        // bar plot
+    Plotly.newPlot("bar", data, layout);
+
+        // bubble plot
+        var trace1 = {
+            x: sampledata.samples[0].otu_ids,
+            y: sampledata.samples[0].sample_values,
+            mode: "markers",
+            marker: {
+                size: sampledata.samples[0].sample_values,
+                color: sampledata.samples[0].otu_ids
+            },
+            text: sampledata.samples[0].otu_labels
+        };
+        var layout1 = {
+            xaxis: {title: "OTU ID"},
+            height: 600,
+            width: 1000
+        };
+        var data1 = [trace1];
+
+    Plotly.newPlot("bubble", data1, layout1);
+    });
+}
